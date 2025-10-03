@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5000/api/v1/auth";
+const BASE_URL = "https://shopease-app-fvn8.onrender.com/api/v1/auth";
 
 export const registerUser = async (userData) => {
   try {
