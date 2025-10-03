@@ -1,12 +1,4 @@
-let API;
-
-if (process.env.NODE_ENV === "development") {
-  API = "https://shopease-app-fvn8.onrender.com/api/v1";
-} else {
-  API = "/api/v1";
-}
-
-export const server = API;
-
+// Use environment variable for backend URL
+export const server = process.env.REACT_APP_API || "https://shopease-app-fvn8.onrender.com/api/v1";
 
 
