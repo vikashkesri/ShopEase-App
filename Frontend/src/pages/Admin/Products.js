@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 // Backend URL from environment variable
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://shopease-app-fvn8.onrender.com";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
