@@ -6,7 +6,7 @@ import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import axios from "axios";
 import toast from "react-hot-toast";
-import Layout from "./../components/Layout/Layout";
+import Layout from "../components/Layout/Layout";
 import { AiOutlineReload } from "react-icons/ai";
 import { server } from "../config"; 
 import "../styles/Homepage.css";
@@ -44,7 +44,7 @@ const HomePage = () => {
     }
   };
 
-  // Get all products 
+  // Get all products
   const getAllProducts = async () => {
     try {
       setLoading(true);
@@ -116,8 +116,6 @@ const HomePage = () => {
     if (page === 1) return;
     loadMore();
   }, [page]);
-
-  // ✅ Add to cart with quantity = 1
   const addToCart = (product) => {
     const exist = cart.find((c) => c._id === product._id);
     let updatedCart = [];
@@ -175,6 +173,7 @@ const HomePage = () => {
             RESET FILTERS
           </button>
         </div>
+
         <div className="products-section">
           <h1>All Products</h1>
           <div className="products-grid">
@@ -189,18 +188,12 @@ const HomePage = () => {
                   <div className="card-name-price">
                     <h5 className="card-title">{p.name}</h5>
                     <h5 className="card-price">
-                      {p.price.toLocaleString("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                      })}
+                      {p.price.toLocaleString("en-US", { style: "currency", currency: "USD" })}
                     </h5>
                   </div>
                   <p className="card-text">{p.description.substring(0, 60)}...</p>
                   <div className="card-name-price">
-                    <button
-                      className="btn btn-info"
-                      onClick={() => navigate(`/product/${p.slug}`)}
-                    >
+                    <button className="btn btn-info" onClick={() => navigate(`/product/${p.slug}`)}>
                       More Details
                     </button>
                     <button className="btn btn-dark" onClick={() => addToCart(p)}>
