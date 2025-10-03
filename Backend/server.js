@@ -1,3 +1,5 @@
+// Backend/server.js
+
 import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
@@ -5,7 +7,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoute.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
-import productRoutes from "./routes/productRoutrs.js";
+import productRoutes from "./routes/productRoutes.js"; // FIXED typo
 
 // Load environment variables
 dotenv.config();
@@ -38,5 +40,5 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server Running in ${process.env.DEV_MODE} mode on port ${PORT}`.bgCyan.white);
+  console.log(`Server Running in ${process.env.DEV_MODE} mode on port ${PORT}`);
 });
