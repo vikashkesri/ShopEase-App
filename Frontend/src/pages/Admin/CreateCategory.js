@@ -6,7 +6,7 @@ import axios from "axios";
 import CategoryForm from '../../components/Form/CategoryForm';
 import { useAuth } from "../../context/auth";
 import { Modal } from 'antd';
-
+import { server } from "../../config"; 
 const CreateCategory = () => {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
@@ -16,15 +16,11 @@ const CreateCategory = () => {
   const [selected, setSelected] = useState(null);
   const [updateName, setUpdateName] = useState("");
 
-  // Fetch or get all categories
+  // Fetch all categories
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get(
-        "https://shopease-app-fvn8.onrender.com/api/v1/category/get-category"
-      );
-      if (data?.success) {
-        setCategories(data?.category);
-      }
+      const { data } = await axios.get(`${server}/category/get-category`);
+      if (data?.success) setCategories(data?.category);
     } catch (error) {
       console.error("Error fetching categories:", error);
       toast.error("Failed to fetch categories");
@@ -42,11 +38,9 @@ const CreateCategory = () => {
 
     try {
       const { data } = await axios.post(
-        "https://shopease-app-fvn8.onrender.com/api/v1/category/create-category",
+        `${server}/category/create-category`,
         { name },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       if (data.success) {
@@ -69,7 +63,7 @@ const CreateCategory = () => {
 
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/api/v1/category/update-category/${selected._id}`,
+        `${server}/category/update-category/${selected._id}`,
         { name: updateName },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -95,7 +89,7 @@ const CreateCategory = () => {
 
     try {
       const { data } = await axios.delete(
-        `https://shopease-app-fvn8.onrender.com/api/v1/category/delete-category/${id}`,
+        `${server}/category/delete-category/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
