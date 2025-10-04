@@ -383,3 +383,22 @@ export const createOrderController = async (req, res) => {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
+
+export const getAllProductsController = async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.status(200).send({
+      success: true,
+      message: "All products list",
+      products,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      success: false,
+      message: "Error while getting products",
+      error,
+    });
+  }
+};
+
