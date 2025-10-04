@@ -26,7 +26,6 @@ const router = express.Router();
 router.post("/create-product", requireSignIn, isAdmin, formidable(), createProductController);
 router.put("/update-product/:pid", requireSignIn, isAdmin, formidable(), updateProductController);
 router.get("/get-product/:id", getProductController);
-router.get("/get-product/:id", getProductController);
 router.get("/get-product/:slug", getSingleProductController);
 router.get("/product-photo/:pid", productPhotoController);
 router.delete("/delete-product/:pid", requireSignIn, isAdmin, deleteProductController);
@@ -36,7 +35,7 @@ router.get("/product-list/:page", productListController);
 router.get("/search", searchProductController);
 router.get("/product-category/:slug", productCategoryController);
 router.get("/related-product/:pid/:cid", relatedProductController);
-router.get("/get-products", getAllProductsController);
+router.get("/get-product", getAllProductsController);
 
 
 // Create Order after payment
