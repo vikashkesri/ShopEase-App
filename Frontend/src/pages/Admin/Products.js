@@ -26,8 +26,7 @@ const Products = () => {
     try {
       const token = getToken();
       const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
-
-      const { data } = await axios.get(`${API_BASE_URL}/api/v1/product/get-product`, config);
+      const { data } = await axios.get(`${API_BASE_URL}/api/v1/product/get-products`, config);
 
       console.log("Products fetched:", data);
 
@@ -43,8 +42,6 @@ const Products = () => {
       );
     }
   };
-
-  // Delete product
   const handleDelete = async (pid) => {
     try {
       const token = getToken();
@@ -124,3 +121,4 @@ const Products = () => {
 };
 
 export default Products;
+
