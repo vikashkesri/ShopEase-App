@@ -14,6 +14,7 @@ import {
   relatedProductController,
   productCategoryController,
   createOrderController,
+  getAllProductsController,
 } from "../controllers/productController.js";
 
 
@@ -34,6 +35,8 @@ router.get("/product-list/:page", productListController);
 router.get("/search", searchProductController);
 router.get("/product-category/:slug", productCategoryController);
 router.get("/related-product/:pid/:cid", relatedProductController);
+router.get("/get-products", getAllProductsController);
+
 
 
 // Create Order after payment
