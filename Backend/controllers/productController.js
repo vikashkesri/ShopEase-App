@@ -272,7 +272,7 @@ export const searchProductController = async (req, res) => {
         ],
       })
       .select("-photo.data");
-    const API = process.env.BACKEND_URL || "http://localhost:5000";
+    const API = process.env.BACKEND_URL || "https://shopease-app-fvn8.onrender.com";
 
     const resultsWithPhoto = results.map((p) => ({
       ...p.toObject(),
