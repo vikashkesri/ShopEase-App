@@ -5,8 +5,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
-// Use backend server URL from config
-import { server } from "../../config";
+// Backend URL from environment variable
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://shopease-app-fvn8.onrender.com";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -27,7 +27,7 @@ const Products = () => {
       const token = getToken();
       const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
 
-      const { data } = await axios.get(`${server}/product/get-product`, config);
+      const { data } = await axios.get(`${API_BASE_URL}https://shopease-app-fvn8.onrender.com/api/v1/product/get-product`, config);
 
       console.log("Products fetched:", data);
 
@@ -48,11 +48,13 @@ const Products = () => {
   const handleDelete = async (pid) => {
     try {
       const token = getToken();
+
       if (!window.confirm("Are you sure you want to delete this product?")) return;
 
-      const { data } = await axios.delete(`${server}/product/delete-product/${pid}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const { data } = await axios.delete(
+        `${API_BASE_URL}/api/v1/product/delete-product/${pid}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
       if (data?.success) {
         toast.success("Product deleted successfully");
@@ -88,7 +90,7 @@ const Products = () => {
               {products.map((p) => (
                 <div key={p._id} className="card m-2" style={{ width: "18rem" }}>
                   <img
-                    src={`${server}/product/product-photo/${p._id}?${new Date().getTime()}`}
+                    src={`${API_BASE_URL}/api/v1/product/product-photo/${p._id}?${new Date().getTime()}`}
                     className="card-img-top"
                     alt={p.name}
                     onError={(e) => (e.target.src = "/default-product.png")}
