@@ -1,6 +1,7 @@
 import productModel from "../models/productModel.js";
 import categoryModel from "../models/categoryModel.js";
 import orderModel from "../models/orderModel.js";
+import Product from "../models/productModel.js";
 import fs from "fs";
 import slugify from "slugify";
 import dotenv from "dotenv";
@@ -57,26 +58,26 @@ export const createProductController = async (req, res) => {
 // GET ALL PRODUCTS
 export const getProductController = async (req, res) => {
   try {
-    const products = await productModel
-      .find({})
-      .populate("category")
-      .select("-photo")
-      .limit(12)
-      .sort({ createdAt: -1 });
-
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).send({
+        success: false,
+        message: "Product not found",
+      });
+    }
     res.status(200).send({
       success: true,
-      countTotal: products.length,
-      products,
+      product,
     });
   } catch (error) {
     res.status(500).send({
       success: false,
-      message: "Error in getting products",
+      message: "Error fetching product",
       error: error.message,
     });
   }
 };
+
 
 // GET SINGLE PRODUCT
 export const getSingleProductController = async (req, res) => {
@@ -384,6 +385,7 @@ export const createOrderController = async (req, res) => {
   }
 };
 
+
 export const getAllProductsController = async (req, res) => {
   try {
     const products = await Product.find({});
@@ -401,4 +403,5 @@ export const getAllProductsController = async (req, res) => {
     });
   }
 };
+
 
