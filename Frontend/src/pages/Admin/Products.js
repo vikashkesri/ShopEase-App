@@ -27,7 +27,7 @@ const Products = () => {
       const token = getToken();
       const config = token ? { headers: { Authorization: `Bearer ${token}` } } : {};
 
-      const { data } = await axios.get(`${API_BASE_URL}https://shopease-app-fvn8.onrender.com/api/v1/product/get-product`, config);
+      const { data } = await axios.get(`${API_BASE_URL}/api/v1/product/get-product`, config);
 
       console.log("Products fetched:", data);
 
